@@ -6,7 +6,7 @@ const cors = require('cors');
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
 
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 app.use(express.json());
 
@@ -22,11 +22,11 @@ const options = {
 };
 app.use(cors(options));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hola, mi server en express');
 });
 
-app.get('/nueva-ruta', (req, res) => {
+app.get('/api/nueva-ruta', (req, res) => {
   res.send('Hola, soy una nueva ruta');
 });
 
@@ -36,7 +36,7 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.get('/home', (req, res) => {
+app.get('/api/home', (req, res) => {
   res.send('Hola, home de la página');
 });
 
